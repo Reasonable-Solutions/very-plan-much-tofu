@@ -1,0 +1,62 @@
+cabal-version: 1.12
+
+name:           horizon-minimal-template
+version:        0.1.0.0
+synopsis:       Short description of your package
+description:    Please see the README on GitHub at <https://gitlab.horizon-haskell.net/haskell/template>
+category:       Web
+author:         <author name here>
+maintainer:     <email here>
+copyright:      <author name here>
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://gitlab.horizon-haskell.net/haskell/template
+
+library
+  exposed-modules:
+      Lib
+  hs-source-dirs:
+      src
+  default-extensions:
+      DataKinds
+      DerivingStrategies
+  ghc-options: -Weverything -Wno-all-missed-specialisations -Wno-implicit-prelude -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe
+  build-depends:
+      base >=4.7 && <5,
+      fast-downward
+  default-language: GHC2021
+
+executable horizon-minimal-template
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  default-extensions:
+      DataKinds
+      DerivingStrategies
+  ghc-options: -Weverything -Wno-all-missed-specialisations -Wno-implicit-prelude -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , horizon-minimal-template
+    , fast-downward
+  default-language: GHC2021
+
+test-suite horizon-minimal-template-tests
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  hs-source-dirs:
+      test
+  default-extensions:
+      DataKinds
+      DerivingStrategies
+  ghc-options: -Weverything -Wno-all-missed-specialisations -Wno-implicit-prelude -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-safe -Wno-unsafe -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , horizon-minimal-template
+  default-language: GHC2021
