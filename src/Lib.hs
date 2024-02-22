@@ -100,5 +100,17 @@ main = do
         [ 1::Int .. ]
         ( totallyOrderedPlan plan )
 
-    _ ->
-      putStrLn "Couldn't find a plan!"
+    Unsolvable -> putStrLn "unsolv"
+
+    UnsolvableIncomplete -> putStrLn "incom!"
+
+    OutOfMemory -> print "oom"
+
+    OutOfTime -> print "oot"
+    CriticalError -> print "crit"
+
+    InputError -> print "inputError"
+
+    Unsupported -> print "unsup"
+
+    Crashed s s' e -> print "crash"

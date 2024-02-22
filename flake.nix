@@ -41,7 +41,8 @@
             legacyPackages.horizon-minimal-template.env.overrideAttrs (attrs: {
               buildInputs = attrs.buildInputs ++ [
                 legacyPackages.cabal-install
-                legacyPackages.fast-downward
+                pkgs.fast-downward
+                pkgs.ponysay
               ];
             });
 
