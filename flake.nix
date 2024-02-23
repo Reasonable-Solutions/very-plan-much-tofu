@@ -14,6 +14,8 @@
     horizon-platform.url =
       "git+https://gitlab.horizon-haskell.net/package-sets/horizon-platform";
 
+    old_nixpkgs.url = "nixpkgs/nixos-20.09";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   };
@@ -31,7 +33,7 @@
               (final.callHackage "fast-downward" "0.2.3.0" { });
 
           };
-
+          oldpkgs = inputs.old_nixpkgs.legacyPackages.${system};
           legacyPackages =
             horizon-platform.legacyPackages.${system}.extend myOverlay;
 
@@ -41,7 +43,17 @@
             legacyPackages.horizon-minimal-template.env.overrideAttrs (attrs: {
               buildInputs = attrs.buildInputs ++ [
                 legacyPackages.cabal-install
-                pkgs.fast-downward
+                (pkgs.fast-downward.overrideAttrs (old: {
+                  name = "fast-downward-2019-05-13";
+
+                  src = pkgs.fetchhg {
+                    url = "http://hg.fast-downward.org/";
+                    rev = "090f5df5d84a";
+                    sha256 =
+                      "14pcjz0jfzx5269axg66iq8js7lm2w3cnqrrhhwmz833prjp945g";
+                  };
+
+                }))
                 pkgs.ponysay
               ];
             });
